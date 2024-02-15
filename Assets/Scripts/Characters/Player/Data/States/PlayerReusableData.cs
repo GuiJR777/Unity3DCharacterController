@@ -8,6 +8,7 @@ namespace RamiresTechGames
     {
         public Vector2 movementInput { get; set; }
         public float movementSpeedModifier { get; set; } = 1f;
+        public float movementDecelerationForce { get; set; } = 1f;
         public float movementOnSlopesSpeedModifier { get; set; } = 1f;
         public bool shouldWalk { get; set; }
 

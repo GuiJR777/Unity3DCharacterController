@@ -22,6 +22,11 @@ namespace RamiresTechGames
 
         #region Input Methods
 
+        protected override void OnMovementCanceled(InputAction.CallbackContext context)
+        {
+            stateMachine.ChangeState(stateMachine.playerLightStoppingState);
+        }
+
         protected override void OnWalkToggleStarted(InputAction.CallbackContext context)
         {
             base.OnWalkToggleStarted(context);

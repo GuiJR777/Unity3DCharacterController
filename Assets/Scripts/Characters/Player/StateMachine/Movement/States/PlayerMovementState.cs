@@ -216,6 +216,24 @@ namespace RamiresTechGames
             stateMachine.player.playerInput.playerActions.WalkToggle.started -= OnWalkToggleStarted;
         }
 
+        protected void DecelerateHorizontally()
+        {
+            Vector3 horizontalVelocity = GetPlayerHorizontalVelocity();
+
+            Vector3 decelerationForce = -horizontalVelocity * stateMachine.playerReusableData.movementDecelerationForce;
+
+            stateMachine.player.body.AddForce(decelerationForce, ForceMode.Acceleration);
+        }
+
+        protected bool IsMovingHorizontally(float threshold = 0.1f)
+        {
+            Vector3 playerMovement = GetPlayerHorizontalVelocity();
+
+            Vector2 playerHorizontalMovement = new Vector2(playerMovement.x, playerMovement.z);
+
+            return playerHorizontalMovement.magnitude > threshold;
+        }
+
         #endregion
 
         #region Input Methods

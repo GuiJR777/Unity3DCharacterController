@@ -92,6 +92,11 @@ namespace RamiresTechGames
 
         #region Input Methods
 
+        protected override void OnMovementCanceled(InputAction.CallbackContext context)
+        {
+            stateMachine.ChangeState(stateMachine.playerHardStoppingState);
+        }
+
         private void OnSprintPerformed(InputAction.CallbackContext context)
         {
             isSprinting = true;

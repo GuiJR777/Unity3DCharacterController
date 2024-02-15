@@ -20,6 +20,12 @@ namespace RamiresTechGames
 
         public PlayerSprintingState playerSprintingState { get; }
 
+        public PlayerLightStoppingState playerLightStoppingState { get; }
+
+        public PlayerMediumStoppingState playerMediumStoppingState { get; }
+
+        public PlayerHardStoppingState playerHardStoppingState { get; }
+
 
     public PlayerMovementStateMachine(Player player)
         {
@@ -32,6 +38,10 @@ namespace RamiresTechGames
             playerWalkingState = new PlayerWalkingState(this);
             playerRunningState = new PlayerRunningState(this);
             playerSprintingState = new PlayerSprintingState(this);
+
+            playerLightStoppingState = new PlayerLightStoppingState(this);
+            playerMediumStoppingState = new PlayerMediumStoppingState(this);
+            playerHardStoppingState = new PlayerHardStoppingState(this);
         }
     }
 }

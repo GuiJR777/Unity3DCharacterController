@@ -39,7 +39,7 @@ namespace RamiresTechGames
 
             if (stateMachine.playerReusableData.movementInput == Vector2.zero)
             {
-                stateMachine.ChangeState(stateMachine.idlingState);
+                stateMachine.ChangeState(stateMachine.playerHardStoppingState);
                 return;
             }
 
