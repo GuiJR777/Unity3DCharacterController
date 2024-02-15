@@ -13,6 +13,8 @@ namespace RamiresTechGames
 
         private int consecutiveDashesUsed;
 
+        private bool shouldKeepRotating;
+
         public PlayerDashingState(PlayerMovementStateMachine stateMachine) : base(stateMachine)
         {
             dashingData = stateMachine.player.playerData.playerGroundedData.dashData;
@@ -26,11 +28,27 @@ namespace RamiresTechGames
 
             stateMachine.playerReusableData.movementSpeedModifier = dashingData.speedModifier;
 
+            stateMachine.playerReusableData.rotationData = dashingData.rotationData;
+
             AddForceOnTransitionFromStationaryState();
+
+            shouldKeepRotating = stateMachine.playerReusableData.movementInput != Vector2.zero;
 
             UpdateConsecutiveDashes();
 
             startTime = Time.time;
+        }
+
+        public override void FixedUpdate()
+        {
+            base.FixedUpdate();
+
+            if (!shouldKeepRotating)
+            {
+                return;
+            }
+
+            RotateTowardsTargetRotation();
         }
 
         public override void OnAnimationTransitionEvent()
@@ -44,6 +62,13 @@ namespace RamiresTechGames
             }
 
             stateMachine.ChangeState(stateMachine.playerSprintingState);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            SetBaseRotationData();
         }
 
         #endregion
@@ -60,6 +85,8 @@ namespace RamiresTechGames
             Vector3 characterFaceDirection = stateMachine.player.transform.forward;
 
             characterFaceDirection.y = 0f;
+
+            UpdateTargetRotation(characterFaceDirection, false);
 
             stateMachine.player.body.velocity = characterFaceDirection * GetMovementSpeed();
         }
@@ -88,6 +115,23 @@ namespace RamiresTechGames
 
         #endregion
 
+        #region Reusable Methods
+
+        protected override void AddInputActionsCallbacks()
+        {
+            base.AddInputActionsCallbacks();
+
+            stateMachine.player.playerInput.playerActions.Movement.performed += OnMovementPerformed;
+        }
+
+        protected override void RemoveInputActionsCallbacks()
+        {
+            base.RemoveInputActionsCallbacks();
+
+            stateMachine.player.playerInput.playerActions.Movement.performed -= OnMovementPerformed;
+        }
+
+        #endregion
 
         #region Input Methods
 
@@ -98,6 +142,11 @@ namespace RamiresTechGames
         protected override void OnDashStarted(InputAction.CallbackContext context)
         {
 
+        }
+
+        protected void OnMovementPerformed(InputAction.CallbackContext context)
+        {
+            shouldKeepRotating = true;
         }
 
         #endregion

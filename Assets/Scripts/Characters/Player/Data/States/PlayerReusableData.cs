@@ -49,5 +49,7 @@ namespace RamiresTechGames
             }
         }
 
+        public PlayerRotationData rotationData { get; set; }
+
     }
 }

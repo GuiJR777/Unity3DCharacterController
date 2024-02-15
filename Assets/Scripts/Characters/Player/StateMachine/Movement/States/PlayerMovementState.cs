@@ -22,7 +22,7 @@ namespace RamiresTechGames
 
         private void InitializeData()
         {
-            stateMachine.playerReusableData.timeToReachTargetRotation = groundedData.baseRotationData.targetRotationReachTime;
+            SetBaseRotationData();
         }
 
         #region IState
@@ -232,6 +232,12 @@ namespace RamiresTechGames
             Vector2 playerHorizontalMovement = new Vector2(playerMovement.x, playerMovement.z);
 
             return playerHorizontalMovement.magnitude > threshold;
+        }
+
+        protected void SetBaseRotationData()
+        {
+            stateMachine.playerReusableData.rotationData = groundedData.baseRotationData;
+            stateMachine.playerReusableData.timeToReachTargetRotation = stateMachine.playerReusableData.rotationData.targetRotationReachTime;
         }
 
         #endregion

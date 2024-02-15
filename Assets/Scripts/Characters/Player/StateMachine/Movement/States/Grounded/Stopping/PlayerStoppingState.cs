@@ -25,6 +25,8 @@ namespace RamiresTechGames
         {
             base.FixedUpdate();
 
+            RotateTowardsTargetRotation();
+
             if (!IsMovingHorizontally())
             {
                 return;
