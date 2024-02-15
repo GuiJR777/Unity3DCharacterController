@@ -43,10 +43,27 @@ namespace RamiresTechGames
         public virtual void HandleInput(){
             ReadMovementInput();
         }
+
         public virtual void Update(){
         }
+
         public virtual void FixedUpdate(){
             Move();
+        }
+
+        public virtual void OnAnimationEnterEvent()
+        {
+
+        }
+
+        public virtual void OnAnimationExitEvent()
+        {
+
+        }
+
+        public virtual void OnAnimationTransitionEvent()
+        {
+
         }
 
         #endregion

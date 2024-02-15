@@ -75,6 +75,8 @@ namespace RamiresTechGames
             base.AddInputActionsCallbacks();
 
             stateMachine.player.playerInput.playerActions.Movement.canceled += OnMovementCanceled;
+
+            stateMachine.player.playerInput.playerActions.Dash.started += OnDashStarted;
         }
 
         protected override void RemoveInputActionsCallbacks()
@@ -82,6 +84,8 @@ namespace RamiresTechGames
             base.RemoveInputActionsCallbacks();
 
             stateMachine.player.playerInput.playerActions.Movement.canceled -= OnMovementCanceled;
+
+            stateMachine.player.playerInput.playerActions.Dash.started -= OnDashStarted;
         }
 
         protected virtual void OnMove()
@@ -103,6 +107,11 @@ namespace RamiresTechGames
         protected virtual void OnMovementCanceled(InputAction.CallbackContext context)
         {
             stateMachine.ChangeState(stateMachine.idlingState);
+        }
+
+        protected virtual void OnDashStarted(InputAction.CallbackContext context)
+        {
+            stateMachine.ChangeState(stateMachine.dashingState);
         }
 
         #endregion

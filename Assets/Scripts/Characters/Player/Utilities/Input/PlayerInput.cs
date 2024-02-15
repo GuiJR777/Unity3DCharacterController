@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace RamiresTechGames
 {
@@ -24,6 +25,18 @@ namespace RamiresTechGames
         private void OnDisable()
         {
             playerInputActions.Disable();
+        }
+
+        public void DisableActionForTime(InputAction action, float time)
+        {
+            action.Disable();
+            StartCoroutine(EnableActionAfterTime(action, time));
+        }
+
+        private IEnumerator EnableActionAfterTime(InputAction action, float time)
+        {
+            yield return new WaitForSeconds(time);
+            action.Enable();
         }
     }
 }

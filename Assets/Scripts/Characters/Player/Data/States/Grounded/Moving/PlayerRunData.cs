@@ -7,5 +7,6 @@ namespace RamiresTechGames
     public class PlayerRunData
     {
         [field: SerializeField] [field: Range(1f, 2f)] public float speedModifier { get; private set; } = 1f;
+        [field: SerializeField] [field: Range(0f, 5f)] public float runToWalkTime { get; private set; } = 0.5f;
     }
 }

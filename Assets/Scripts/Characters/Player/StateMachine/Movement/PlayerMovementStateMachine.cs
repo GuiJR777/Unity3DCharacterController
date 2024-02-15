@@ -12,6 +12,8 @@ namespace RamiresTechGames
 
         public PlayerIdlingState idlingState { get; }
 
+        public PlayerDashingState dashingState { get; }
+
         public PlayerWalkingState playerWalkingState { get; }
 
         public PlayerRunningState playerRunningState { get; }
@@ -25,6 +27,8 @@ namespace RamiresTechGames
             playerReusableData = new PlayerReusableData();
 
             idlingState = new PlayerIdlingState(this);
+            dashingState = new PlayerDashingState(this);
+
             playerWalkingState = new PlayerWalkingState(this);
             playerRunningState = new PlayerRunningState(this);
             playerSprintingState = new PlayerSprintingState(this);
